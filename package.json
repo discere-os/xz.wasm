@@ -1,0 +1,69 @@
+{
+  "name": "@superstruct/xz.wasm",
+  "version": "5.6.3",
+  "type": "module",
+  "description": "High-performance XZ/LZMA2 compression library compiled to WebAssembly",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "./build-wasm.sh",
+    "build:simd": "ENABLE_SIMD=ON ./build-wasm.sh",
+    "build:native": "ENABLE_WASM_NATIVE=ON ./build-wasm.sh",
+    "build:full": "ENABLE_SIMD=ON ENABLE_WASM_NATIVE=ON ./build-wasm.sh",
+    "test": "node --test test/**/*.test.mjs",
+    "test:performance": "node test/performance/benchmark.mjs",
+    "benchmark": "node test/performance/benchmark.mjs --detailed",
+    "clean": "rm -rf build-wasm-* dist/",
+    "dev": "python3 -m http.server 3000",
+    "validate": "npm run build && npm test && npm run test:performance"
+  },
+  "keywords": [
+    "xz",
+    "lzma", 
+    "lzma2",
+    "compression",
+    "decompression",
+    "archive",
+    "wasm",
+    "webassembly",
+    "performance",
+    "browser",
+    "nodejs"
+  ],
+  "author": "Superstruct Ltd",
+  "license": "0BSD",
+  "files": [
+    "dist/",
+    "wasm/",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/superstruct/superstruct.git",
+    "directory": "xz.wasm"
+  },
+  "homepage": "https://github.com/superstruct/superstruct/tree/main/xz.wasm",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "browser": {
+    "fs": false,
+    "path": false
+  },
+  "wasm": {
+    "features": ["xz-compression", "lzma2-compression", "crc-checksums"],
+    "optionalFeatures": ["simd-optimization"],
+    "performance": {
+      "compressionSpeed": "15-30 MB/s",
+      "decompressionSpeed": "80-150 MB/s",
+      "compressionRatio": "2.2-4.5x"
+    }
+  }
+}

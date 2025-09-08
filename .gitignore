@@ -111,3 +111,32 @@ coverage
 /*.gmo
 
 /.vscode/
+
+# WASM build artifacts  
+build-wasm-*/
+dist/
+
+# Node.js artifacts
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing artifacts
+test-results/
+coverage/
+benchmark-results.json
+
+# Development artifacts  
+*.log
+.env
+.env.local
+.idea/
+
+# macOS
+.DS_Store
+
+# Temporary files
+tmp/
+*.tmp
+*.temp
